@@ -42,13 +42,13 @@ public class Spider {
         }
         Elements lemma_summary = doc.select("div.lemma-summary");
         for (Element element :lemma_summary){
-            String text = element.text();
+            String text = element.text(); //获取标题
             System.out.println(text);
         }
         //basic-info cmn-clearfix
         Elements basic_info_cmn_clearfix = doc.select("div[class=basic-info cmn-clearfix]");
 
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();  //获取属性
         for (Element element :basic_info_cmn_clearfix){
             String text = element.text();
             System.out.println(text);
@@ -74,7 +74,20 @@ public class Spider {
                 }
 
             }
-            System.out.println( map);
+            System.out.println(map);
+        }
+
+        Elements level_2 = doc.select("h2[class=para-title level-2]");
+        for (int i=0; i<level_2.size(); i++){
+            Element element = level_2.get(i);
+            Elements siblingElements = element.siblingElements();
+            for(int j=0; j<siblingElements.size(); j++){
+                Element element1 = siblingElements.get(j);
+                if(element1.equals(level_2.get(i+1))) {
+
+                    break;
+                }
+            }
         }
 
 
