@@ -78,13 +78,22 @@ public class Spider {
         }
 
         Elements level_2 = doc.select("h2[class=para-title level-2]");
+        int j = 0;
         for (int i=0; i<level_2.size(); i++){
             Element element = level_2.get(i);
+            String titleContent = element.text();
+            System.out.println(titleContent);
             Elements siblingElements = element.siblingElements();
-            for(int j=0; j<siblingElements.size(); j++){
+            String text;
+            for(; j<siblingElements.size(); j++){
                 Element element1 = siblingElements.get(j);
+                if(element1.select("div[class=para]").size() > 0 || element1.select("h3[class=para-title level-3]").size() > 0){
+                    text = element1.select("div[class=para]").text();
+                    text += element1.select("h3[class=para-title level-3]").text();
+                    System.out.println(text);
+                }
+                
                 if(element1.equals(level_2.get(i+1))) {
-
                     break;
                 }
             }
