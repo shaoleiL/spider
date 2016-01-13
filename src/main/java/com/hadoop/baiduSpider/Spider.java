@@ -31,7 +31,7 @@ import java.util.Map;
 public class Spider {
     private static Logger logger = LoggerFactory.getLogger(Spider.class);
     public static void main(String[] args) throws XPatherException {
-        String url = "http://baike.baidu.com/view/3080925.htm";
+        String url = "http://baike.baidu.com/view/765943.htm";
         String context = getContext(url);
 
         Document doc = Jsoup.parse(context);
@@ -92,9 +92,11 @@ public class Spider {
                     text += element1.select("h3[class=para-title level-3]").text();
                     System.out.println(text);
                 }
-                
-                if(element1.equals(level_2.get(i+1))) {
-                    break;
+
+                if(i != level_2.size()-1) {
+                    if (element1.equals(level_2.get(i + 1))) {
+                        break;
+                    }
                 }
             }
         }
