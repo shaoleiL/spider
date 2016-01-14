@@ -81,12 +81,13 @@ public class Spider {
         int j = 0;
         for (int i=0; i<level_2.size(); i++){
             Element element = level_2.get(i);
-            String titleContent = element.text();
+            String titleContent =element.select("span[class=title-text]").text();
             System.out.println(titleContent);
             Elements siblingElements = element.siblingElements();
             String text;
             for(; j<siblingElements.size(); j++){
                 Element element1 = siblingElements.get(j);
+
                 if(element1.select("div[class=para]").size() > 0 || element1.select("h3[class=para-title level-3]").size() > 0){
                     text = element1.select("div[class=para]").text();
                     text += element1.select("h3[class=para-title level-3]").text();
@@ -100,6 +101,14 @@ public class Spider {
                 }
             }
         }
+
+        //词条标签
+        Elements open_tag_title = doc.select("dd[id=open-tag-item]");
+        String tag = "";
+        for (Element element : open_tag_title) {
+            tag += element.text();
+        }
+        System.out.println(tag);
 
 
     }
